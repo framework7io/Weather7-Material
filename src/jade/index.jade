@@ -1,0 +1,110 @@
+doctype
+html(manifest="manifest.php")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui")
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name="theme-color", content="#9c27b0")
+    title Weather7
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,700', rel='stylesheet', type='text/css')
+    link(rel="stylesheet", href="libs/framework7/dist/css/framework7.material.css")
+    link(rel="stylesheet", href="libs/framework7/dist/css/framework7.material.colors.css")
+    link(rel="stylesheet", href="css/weather7.css")
+    link(rel="icon", href="img/icon.png")
+  body
+    // Main views
+    .views
+      .view.view-main.navbar-fixed
+        .pages
+          .page(data-page="index")
+            a(href="#").open-popup.link.floating-button.color-blue
+              i.icon.icon-plus
+            .navbar.theme-purple
+              .navbar-inner
+                .center Weather7
+            .fake-navbar.bg-purple
+            .page-content
+              .list-block.places-list
+                ul
+                .list-block-label
+                  img(src="img/yahoo-logo.png", height="20")
+    // Search popup
+    .popup
+      .view
+        .pages
+          .page.navbar-fixed
+            .navbar
+              .navbar-inner
+                form.searchbar
+                  .searchbar-input
+                    input(type="search", placeholder="Search")
+                    a(href="#").searchbar-clear
+                    .preloader.preloader-white
+            .page-content
+              .list-block
+                ul.search-results
+    // Templates
+    script(id="search-results-template", type="text/template")
+      | {{#each this}}
+      | {{#if admin1}}{{#if admin1.content}}
+      li.close-popup(data-woeid="{{woeid}}", data-city="{{name}}", data-country="{{country.content}}")
+        a(href="#").item-content.item-link
+          .item-inner
+            .item-title
+              | {{name}} 
+              span {{admin1.content}}, {{country.content}}
+      | {{/if}}{{/if}}
+      | {{/each}}
+
+    script(id="home-items-template", type="text/template")
+      | {{#each this}}
+      li.swipeout(data-woeid="{{woeid}}")
+        .swipeout-content
+          a(href="#", data-woeid="{{woeid}}").item-content.item-link
+            .item-inner
+              .item-title
+                .city {{city}}
+                .country {{country}}
+              .item-after {{condition.temp}}&deg;
+        .swipeout-actions-right
+          a(href="#").swipeout-delete
+            i.icon.icon-delete
+      | {{else}}
+      li.item-content
+        .item-inner
+          .item-title You haven't added any places yet
+      | {{/each}}
+    script(id="details-template", type="text/template")
+      .pages.navbar-fixed
+        .page(data-page="detail", data-woeid="{{woeid}}")
+          .navbar.theme-purple
+            .navbar-inner
+              .left
+                a(href="index.html").back.link.icon-only
+                  i.icon.icon-back
+              .center {{city}}
+          .fake-navbar.bg-purple
+          .page-content
+            .detail-page-header
+              .detail-page-header-overlay
+              .detail-temp {{condition.temp}}&deg;
+              .detail-condition {{condition.text}}
+            .list-block.forecast-list
+              ul
+                | {{#each forecast}}
+                li.item-content
+                  .item-inner
+                    .item-title
+                      .day {{dayOfWeek date}}
+                      .date {{formatedDated date}}
+                    .item-after 
+                      .state {{text}}
+                      .temps
+                        span.high {{high}}&deg;
+                        span.low {{low}}&deg;
+                | {{/each}}
+
+    // Path to Framework7 Library JS
+    script(type="text/javascript", src="libs/framework7/dist/js/framework7.js")
+    // Path to your app js
+    script(type="text/javascript", src="js/weather7.js")
