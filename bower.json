@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/nolimits4web/Weather7-Material.git"
   },
-  "description": "Framework7 Weather Material-style demo app",
+  "description": "Framework7 weather demo app in Material style",
   "version": "1.0.0",
   "author": "Vladimir Kharlampidi",
   "homepage": "http://www.idangero.us/framework7",

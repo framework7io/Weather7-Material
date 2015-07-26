@@ -1,7 +1,7 @@
 {
   "name": "weather7-material",
   "version": "1.0.0",
-  "description": "Framework7 Weather Material-style demo app",
+  "description": "Framework7 weather demo app in Material style",
   "repository": {
     "type": "git",
     "url": "https://github.com/nolimits4web/Weather7-Material.git"
